@@ -5,7 +5,7 @@ import ir.moke.coinex.model.enums.MarketType;
 import ir.moke.coinex.model.enums.OrderSide;
 import ir.moke.coinex.model.enums.OrderType;
 import ir.moke.coinex.model.request.Order;
-import ir.moke.coinex.model.request.Ticker;
+import ir.moke.coinex.model.response.TickerResponse;
 import ir.moke.coinex.model.response.MarketResponse;
 import ir.moke.coinex.model.response.OrderResponse;
 import ir.moke.coinex.model.Response;
@@ -41,7 +41,7 @@ public class PerpetualTest {
 
     @Test
     public void ticker() {
-        Response<List<Ticker>> response = perpetual.ticker("BTCUSDT,DOGEUSDT");
+        Response<List<TickerResponse>> response = perpetual.ticker("BTCUSDT,DOGEUSDT");
         Assertions.assertEquals(0, response.getCode());
         Assertions.assertEquals(2, response.getData().size());
         Assertions.assertEquals("BTCUSDT", response.getData().getFirst().getMarket());
@@ -58,7 +58,6 @@ public class PerpetualTest {
 
     @Test
     public void batchOrderStatus() {
-        String str = perpetual.batchOrderStatus("BTCUSDT", "13400");
-        System.out.println(str);
+        Response<List<Response<OrderResponse>>> batchOrderStatus = perpetual.batchOrderStatus("BTCUSDT", "13400");
     }
 }

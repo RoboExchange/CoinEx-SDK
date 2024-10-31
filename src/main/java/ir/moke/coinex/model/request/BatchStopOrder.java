@@ -2,5 +2,5 @@ package ir.moke.coinex.model.request;
 
 import java.util.List;
 
-public record BatchOrder(List<Order> orders) {
+public record BatchStopOrder(List<StopOrder> orders) {
 }
