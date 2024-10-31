@@ -2,7 +2,6 @@ package ir.moke.coinex.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ir.moke.coinex.model.enums.*;
-import ir.moke.sdk.coinex.model.enums.*;
 
 public class StopOrder {
     @JsonProperty("market")
