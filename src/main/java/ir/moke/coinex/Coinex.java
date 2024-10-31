@@ -1,42 +1,48 @@
-package ir.moke.sdk.coinex;
+package ir.moke.coinex;
 
+import ir.moke.coinex.resource.Perpetual;
 import ir.moke.kafir.http.Kafir;
 
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
 
-public class CoinExSDK {
-
+public class Coinex {
+    private final String baseUrl;
     private final String accessId;
     private final String secretKey;
     private final Duration connectionTimeout;
-    private String baseUrl = "https://api.coinex.com/v2";
 
-    public CoinExSDK(Builder builder) {
+    private Coinex(Builder builder) {
         this.baseUrl = builder.baseUrl;
         this.accessId = builder.accessId;
         this.secretKey = builder.secretKey;
         this.connectionTimeout = builder.connectionTimeout;
     }
 
+    public String getBaseUrl() {
+        return baseUrl;
+    }
+
+    public String getAccessId() {
+        return accessId;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public Duration getConnectionTimeout() {
+        return connectionTimeout;
+    }
+
     public static class Builder {
         private String baseUrl = "https://api.coinex.com/v2";
         private String accessId;
         private String secretKey;
-        private Duration connectionTimeout;
-
-        public String getBaseUrl() {
-            return baseUrl;
-        }
+        private Duration connectionTimeout = Duration.ofSeconds(3600);
 
         public Builder setBaseUrl(String baseUrl) {
             this.baseUrl = baseUrl;
             return this;
-        }
-
-        public String getAccessId() {
-            return accessId;
         }
 
         public Builder setAccessId(String accessId) {
@@ -44,17 +50,9 @@ public class CoinExSDK {
             return this;
         }
 
-        public String getSecretKey() {
-            return secretKey;
-        }
-
         public Builder setSecretKey(String secretKey) {
             this.secretKey = secretKey;
             return this;
-        }
-
-        public Duration getConnectionTimeout() {
-            return connectionTimeout;
         }
 
         public Builder setConnectionTimeout(Duration connectionTimeout) {
@@ -65,16 +63,13 @@ public class CoinExSDK {
         public <T> T build(Class<T> clazz) {
             return new Kafir.KafirBuilder()
                     .setBaseUri(this.baseUrl)
+                    .setConnectionTimeout(connectionTimeout)
                     .setInterceptor(new SignatureInterceptor(accessId, secretKey))
                     .build(clazz);
         }
 
-        private Map<String, String> headers(String sign, long timestamp) {
-            Map<String, String> map = new HashMap<>();
-            map.put("X-COINEX-KEY", this.accessId);
-            map.put("X-COINEX-SIGN", sign);
-            map.put("X-COINEX-TIMESTAMP", String.valueOf(timestamp));
-            return map;
+        public Perpetual perpetual() {
+            return build(Perpetual.class);
         }
     }
 }
