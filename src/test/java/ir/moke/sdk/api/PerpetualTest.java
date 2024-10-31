@@ -34,18 +34,18 @@ public class PerpetualTest {
     @Test
     public void market() {
         Response<List<MarketResponse>> response = perpetual.market("BTCUSDT");
-        Assertions.assertEquals(0, response.getCode());
-        Assertions.assertEquals(1, response.getData().size());
-        Assertions.assertEquals("BTCUSDT", response.getData().getFirst().getMarket());
+        Assertions.assertEquals(0, response.code());
+        Assertions.assertEquals(1, response.data().size());
+        Assertions.assertEquals("BTCUSDT", response.data().getFirst().market());
     }
 
     @Test
     public void ticker() {
         Response<List<TickerResponse>> response = perpetual.ticker("BTCUSDT,DOGEUSDT");
-        Assertions.assertEquals(0, response.getCode());
-        Assertions.assertEquals(2, response.getData().size());
-        Assertions.assertEquals("BTCUSDT", response.getData().getFirst().getMarket());
-        Assertions.assertEquals("DOGEUSDT", response.getData().getLast().getMarket());
+        Assertions.assertEquals(0, response.code());
+        Assertions.assertEquals(2, response.data().size());
+        Assertions.assertEquals("BTCUSDT", response.data().getFirst().market());
+        Assertions.assertEquals("DOGEUSDT", response.data().getLast().market());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PerpetualTest {
         Order order = new Order("BTCUSDT", MarketType.FUTURES, OrderSide.SELL, OrderType.MARKET, "1000");
         Response<OrderResponse> response = perpetual.order(order);
         System.out.println(response);
-        Assertions.assertNotEquals(0, response.getCode());
+        Assertions.assertNotEquals(0, response.code());
     }
 
     @Test
