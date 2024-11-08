@@ -1,6 +1,8 @@
 package ir.moke.coinex.resource;
 
 import ir.moke.coinex.model.Response;
+import ir.moke.coinex.model.enums.MarketType;
+import ir.moke.coinex.model.enums.OrderSide;
 import ir.moke.coinex.model.request.*;
 import ir.moke.coinex.model.response.MarketResponse;
 import ir.moke.coinex.model.response.OrderResponse;
@@ -38,11 +40,41 @@ public interface Perpetual {
     @GET("/futures/batch-order-status")
     Response<List<Response<OrderResponse>>> batchOrderStatus(@QueryParameter("market") String market, @QueryParameter("order_ids") String orderIds);
 
+    @GET("/futures/pending-order")
+    Response<OrderResponse> pendingOrder(@QueryParameter("market") String market,
+                                         @QueryParameter("market_type") MarketType marketType,
+                                         @QueryParameter("side") OrderSide side,
+                                         @QueryParameter("client_id") String clientId,
+                                         @QueryParameter("page") Integer page,
+                                         @QueryParameter("limit") Integer limit);
+
+    @GET("/futures/finished-order")
+    Response<OrderResponse> finishedOrder(@QueryParameter("market") String market,
+                                          @QueryParameter("market_type") MarketType marketType,
+                                          @QueryParameter("side") OrderSide side,
+                                          @QueryParameter("page") Integer page,
+                                          @QueryParameter("limit") Integer limit);
+
+    @GET("/futures/pending-stop-order")
+    Response<OrderResponse> pendingStopOrder(@QueryParameter("market") String market,
+                                             @QueryParameter("market_type") MarketType marketType,
+                                             @QueryParameter("side") OrderSide side,
+                                             @QueryParameter("client_id") String clientId,
+                                             @QueryParameter("page") Integer page,
+                                             @QueryParameter("limit") Integer limit);
+
+    @GET("/futures/finished-stop-order")
+    Response<OrderResponse> finishedStopOrder(@QueryParameter("market") String market,
+                                              @QueryParameter("market_type") MarketType marketType,
+                                              @QueryParameter("side") OrderSide side,
+                                              @QueryParameter("page") Integer page,
+                                              @QueryParameter("limit") Integer limit);
+
     @POST("/futures/modify-order")
     Response<OrderResponse> modifyOrder(ModifyOrder modifyOrder);
 
     @POST("/futures/modify-stop-order")
-    Response<OrderResponse> modifyStopOrder(ModifyStopOrder modifyStopOrder);
+    Response<StopOrderResponse> modifyStopOrder(ModifyStopOrder modifyStopOrder);
 
     @POST("/futures/cancel-all-order")
     Response<Void> cancelAllOrder(CancelAllOrder cancelAllOrder);

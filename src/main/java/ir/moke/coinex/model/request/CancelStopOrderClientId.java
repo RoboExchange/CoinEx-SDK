@@ -9,4 +9,5 @@ public record CancelStopOrderClientId(@JsonProperty("market") String market,
     public CancelStopOrderClientId(MarketType marketType, String clientId) {
         this(null, marketType, clientId);
     }
+    
 }
