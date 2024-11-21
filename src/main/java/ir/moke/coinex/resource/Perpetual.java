@@ -38,7 +38,7 @@ public interface Perpetual {
     Response<List<Response<OrderResponse>>> batchOrderStatus(@QueryParameter("market") String market, @QueryParameter("order_ids") String orderIds);
 
     @GET("/futures/pending-order")
-    Response<OrderResponse> pendingOrder(@QueryParameter("market") String market,
+    Response<List<OrderResponse>> pendingOrder(@QueryParameter("market") String market,
                                          @QueryParameter("market_type") MarketType marketType,
                                          @QueryParameter("side") OrderSide side,
                                          @QueryParameter("client_id") String clientId,
@@ -89,10 +89,10 @@ public interface Perpetual {
     Response<PositionResponse> adjustPositionMargin(PositionMargin positionMargin);
 
     @POST("/futures/adjust-position-leverage")
-    Response<String> adjustPositionLeverage(PositionLeverage leverage);
+    Response<LeverageResponse> adjustPositionLeverage(PositionLeverage leverage);
 
     @GET("/futures/pending-position")
-    Response<PositionResponse> pendingPosition(@QueryParameter("market") String market,
+    Response<List<PositionResponse>> pendingPosition(@QueryParameter("market") String market,
                                                @QueryParameter("market_type") MarketType marketType,
                                                @QueryParameter("page") Integer page,
                                                @QueryParameter("limit") Integer limit);

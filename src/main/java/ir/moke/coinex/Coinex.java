@@ -1,5 +1,6 @@
 package ir.moke.coinex;
 
+import ir.moke.coinex.resource.Asset;
 import ir.moke.coinex.resource.Perpetual;
 import ir.moke.kafir.http.Kafir;
 
@@ -70,6 +71,10 @@ public class Coinex {
 
         public Perpetual perpetual() {
             return build(Perpetual.class);
+        }
+
+        public Asset asset() {
+            return build(Asset.class);
         }
     }
 }

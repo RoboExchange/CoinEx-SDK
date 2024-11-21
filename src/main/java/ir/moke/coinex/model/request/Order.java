@@ -13,9 +13,9 @@ public record Order(@JsonProperty("market") String market,
                     @JsonProperty("amount") String amount,
                     @JsonProperty("price") String price,
                     @JsonProperty("client_id") String clientId,
-                    @JsonProperty("is_hide") String isHide,
+                    @JsonProperty("is_hide") Boolean isHide,
                     @JsonProperty("stp_mode") StpMode stpMode) {
-    public Order(String market, MarketType marketType, OrderSide side, OrderType orderType, String amount) {
-        this(market, marketType, side, orderType, amount, null, null, null, null);
+    public Order(String market, MarketType marketType, OrderSide side, String amount) {
+        this(market, marketType, side, OrderType.MARKET, amount, null, null, null, null);
     }
 }

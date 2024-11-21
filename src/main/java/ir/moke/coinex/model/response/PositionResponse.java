@@ -7,7 +7,7 @@ public record PositionResponse(
         @JsonProperty("position_id") String positionId,
         @JsonProperty("market") String market,
         @JsonProperty("market_type") MarketType marketType,
-        @JsonProperty("side") OrderSide side,
+        @JsonProperty("side") PositionSide side,
         @JsonProperty("margin_mode") MarginMode marginMode,
         @JsonProperty("open_interest") String openInterest,
         @JsonProperty("close_avbl") String closeAvbl,
@@ -29,9 +29,9 @@ public record PositionResponse(
         @JsonProperty("maintenance_margin_value") String maintenanceMarginValue,
         @JsonProperty("liq_price") String liqPrice,
         @JsonProperty("bkr_price") String bkrPrice,
-        @JsonProperty("adl_level") Integer adlLevel,
+        @JsonProperty("adl_level") Long adlLevel,
         @JsonProperty("settle_price") String settlePrice,
         @JsonProperty("settle_value") String settleValue,
-        @JsonProperty("created_at") Integer createdAt,
-        @JsonProperty("updated_at") Integer updatedAt) {
+        @JsonProperty("created_at") Long createdAt,
+        @JsonProperty("updated_at") Long updatedAt) {
 }

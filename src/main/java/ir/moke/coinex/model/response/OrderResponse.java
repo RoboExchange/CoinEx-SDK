@@ -1,12 +1,14 @@
 package ir.moke.coinex.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ir.moke.coinex.model.enums.MarketType;
+import ir.moke.coinex.model.enums.OrderSide;
 import ir.moke.coinex.model.enums.OrderStatus;
 
-public record OrderResponse(@JsonProperty("order_id") String orderId,
+public record OrderResponse(@JsonProperty("order_id") Long orderId,
                             @JsonProperty("market") String market,
-                            @JsonProperty("market_type") String marketType,
-                            @JsonProperty("side") String side,
+                            @JsonProperty("market_type") MarketType marketType,
+                            @JsonProperty("side") OrderSide side,
                             @JsonProperty("type") String type,
                             @JsonProperty("amount") String amount,
                             @JsonProperty("price") String price,

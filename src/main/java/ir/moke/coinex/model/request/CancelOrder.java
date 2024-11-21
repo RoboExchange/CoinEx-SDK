@@ -5,5 +5,5 @@ import ir.moke.coinex.model.enums.MarketType;
 
 public record CancelOrder(@JsonProperty("market") String market,
                           @JsonProperty("market_type") MarketType marketType,
-                          @JsonProperty("order_id") String orderId) {
+                          @JsonProperty("order_id") Long orderId) {
 }
