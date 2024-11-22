@@ -18,4 +18,8 @@ public record Order(@JsonProperty("market") String market,
     public Order(String market, MarketType marketType, OrderSide side, String amount) {
         this(market, marketType, side, OrderType.MARKET, amount, null, null, null, null);
     }
+
+    public Order(String market, MarketType marketType, OrderSide side, String amount, String clientId) {
+        this(market, marketType, side, OrderType.MARKET, amount, null, clientId, null, null);
+    }
 }
