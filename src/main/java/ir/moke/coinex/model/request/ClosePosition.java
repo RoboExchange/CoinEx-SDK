@@ -13,7 +13,7 @@ public record ClosePosition(@JsonProperty("market") String market,
                             @JsonProperty("client_id") String clientId,
                             @JsonProperty("is_hide") String isHide,
                             @JsonProperty("stp_mode") StpMode stpMode) {
-    public ClosePosition(String market, MarketType marketType, OrderType orderType) {
-        this(market, marketType, orderType, null, null, null, null, null);
+    public ClosePosition(String market, MarketType marketType) {
+        this(market, marketType, OrderType.MARKET, null, null, null, null, null);
     }
 }
