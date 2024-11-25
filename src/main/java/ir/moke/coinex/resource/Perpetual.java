@@ -39,11 +39,11 @@ public interface Perpetual {
 
     @GET("/futures/pending-order")
     Response<List<OrderResponse>> pendingOrder(@QueryParameter("market") String market,
-                                         @QueryParameter("market_type") MarketType marketType,
-                                         @QueryParameter("side") OrderSide side,
-                                         @QueryParameter("client_id") String clientId,
-                                         @QueryParameter("page") Integer page,
-                                         @QueryParameter("limit") Integer limit);
+                                               @QueryParameter("market_type") MarketType marketType,
+                                               @QueryParameter("side") OrderSide side,
+                                               @QueryParameter("client_id") String clientId,
+                                               @QueryParameter("page") Integer page,
+                                               @QueryParameter("limit") Integer limit);
 
     @GET("/futures/finished-order")
     Response<OrderResponse> finishedOrder(@QueryParameter("market") String market,
@@ -93,13 +93,21 @@ public interface Perpetual {
 
     @GET("/futures/pending-position")
     Response<List<PositionResponse>> pendingPosition(@QueryParameter("market") String market,
-                                               @QueryParameter("market_type") MarketType marketType,
-                                               @QueryParameter("page") Integer page,
-                                               @QueryParameter("limit") Integer limit);
+                                                     @QueryParameter("market_type") MarketType marketType,
+                                                     @QueryParameter("page") Integer page,
+                                                     @QueryParameter("limit") Integer limit);
 
     @POST("/futures/set-position-stop-loss")
     Response<PositionResponse> setPositionStopLoss(PositionStopLoss stopLoss);
 
     @POST("/futures/set-position-take-profit")
     Response<PositionResponse> setPositionTakeProfit(PositionTakeProfit takeProfit);
+
+    @GET("/futures/finished-position")
+    Response<List<PositionResponse>> finishedPosition(@QueryParameter("market") String market,
+                                                      @QueryParameter("market_type") MarketType marketType,
+                                                      @QueryParameter("start_time") Integer startTime, // timestamp
+                                                      @QueryParameter("end_time") Integer endTime, // timestamp
+                                                      @QueryParameter("page") Integer page,
+                                                      @QueryParameter("limit") Integer limit);
 }

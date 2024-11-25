@@ -188,4 +188,11 @@ public class PerpetualTest {
         Assertions.assertNotNull(positionResponse);
         Assertions.assertTrue(positionResponse.data().isEmpty());
     }
+
+    @Test
+    @org.junit.jupiter.api.Order(9)
+    public void positionHistory() {
+        Response<List<PositionResponse>> response = perpetual.finishedPosition(SYMBOL, MarketType.FUTURES, null, null, 0, 1);
+        Assertions.assertEquals(response.code(), 0);
+    }
 }
