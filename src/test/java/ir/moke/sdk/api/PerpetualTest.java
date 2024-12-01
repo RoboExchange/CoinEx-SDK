@@ -138,7 +138,10 @@ public class PerpetualTest {
     @Test
     @org.junit.jupiter.api.Order(8)
     public void marketOrder() {
+        // First check current open positions
         Response<List<PositionResponse>> positionResponse = perpetual.pendingPosition(SYMBOL, MarketType.FUTURES, null, null);
+        Assertions.assertEquals(positionResponse.code(), 0);
+        System.out.printf("Current open positions: %s%n", positionResponse.data().size());
         if (!positionResponse.data().isEmpty()) {
             for (PositionResponse pr : positionResponse.data()) {
                 Response<OrderResponse> closeResponse = perpetual.closePosition(new ClosePosition(pr.market(), pr.marketType()));
