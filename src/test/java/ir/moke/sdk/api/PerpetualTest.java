@@ -69,7 +69,7 @@ public class PerpetualTest {
         Assertions.assertEquals(resp.data().leverage(), 20);
 
         // second time
-        int leverage = 10;
+        int leverage = 5;
         resp = perpetual.adjustPositionLeverage(new PositionLeverage(SYMBOL, MarketType.FUTURES, MarginMode.ISOLATED, leverage));
         Assertions.assertNotNull(resp);
         Assertions.assertEquals(resp.data().leverage(), leverage);
