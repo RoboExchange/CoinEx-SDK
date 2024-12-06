@@ -1,4 +1,0 @@
-[
-  {"interfaces": ["ir.moke.coinex.resource.Perpetual"]},
-  {"interfaces": ["ir.moke.coinex.resource.Asset"]}
-]
