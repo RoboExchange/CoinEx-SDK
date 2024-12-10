@@ -10,7 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
 import java.time.Duration;
-import java.util.concurrent.CompletionStage;
+import java.util.concurrent.CompletableFuture;
 
 public class Coinex {
     private final String baseUrl;
@@ -95,10 +95,12 @@ public class Coinex {
             return build(Asset.class);
         }
 
-        public CompletionStage<WebSocket> perpetualWebSocket(CoinexListener listener) {
+        public CompletableFuture<WebSocket> perpetualWebSocket(CoinexListener listener) {
+//            try (HttpClient client = HttpClient.newHttpClient()) {
             return HttpClient.newHttpClient()
                     .newWebSocketBuilder()
                     .buildAsync(URI.create(perpetualWebSocketUrl), new WebSocketHandler(listener));
+//            }
         }
     }
 }

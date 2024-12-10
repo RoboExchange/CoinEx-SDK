@@ -1,5 +1,7 @@
 package ir.moke.coinex.ws;
 
+import java.util.List;
+
 public interface CoinexListener {
-    void onMessage(String message);
+    void onStatusSubscription(List<MarketStatusSubscription> subscription);
 }
