@@ -96,11 +96,9 @@ public class Coinex {
         }
 
         public CompletableFuture<WebSocket> perpetualWebSocket(CoinexListener listener) {
-//            try (HttpClient client = HttpClient.newHttpClient()) {
             return HttpClient.newHttpClient()
                     .newWebSocketBuilder()
                     .buildAsync(URI.create(perpetualWebSocketUrl), new WebSocketHandler(listener));
-//            }
         }
     }
 }
