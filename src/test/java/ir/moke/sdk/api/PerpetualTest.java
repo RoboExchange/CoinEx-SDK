@@ -145,6 +145,7 @@ public class PerpetualTest {
         System.out.printf("Current open positions: %s%n", positionResponse.data().size());
         if (!positionResponse.data().isEmpty()) {
             for (PositionResponse pr : positionResponse.data()) {
+                System.out.println("Close position : " + pr.positionId());
                 Response<OrderResponse> closeResponse = perpetual.closePosition(new ClosePosition(pr.market(), pr.marketType()));
                 Assertions.assertEquals(closeResponse.code(), 0);
             }
@@ -152,6 +153,7 @@ public class PerpetualTest {
 
         Response<List<MarketResponse>> marketResponse = perpetual.market(SYMBOL);
         String minAmount = marketResponse.data().getFirst().minAmount();
+        System.out.println("Min amount : " + minAmount);
 
         // Check available balance before enter position
         Response<List<FutureBalanceResponse>> beforeBalanceResponse = asset.futuresBalance();
@@ -159,7 +161,7 @@ public class PerpetualTest {
         System.out.println(JsonUtils.toJson(beforeBalanceResponse.data()));
 
         // Enter market position
-        Order order = new Order(SYMBOL, MarketType.FUTURES, OrderSide.BUY, minAmount);
+        Order order = new Order(SYMBOL, MarketType.FUTURES, OrderSide.BUY, minAmount, "abcd1234");
         Response<OrderResponse> response = perpetual.order(order);
         System.out.println("Order : " + JsonUtils.toJson(response.data()));
         Assertions.assertEquals(0, response.code());
