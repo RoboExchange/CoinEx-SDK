@@ -6,10 +6,8 @@ import ir.moke.coinex.model.enums.MarginMode;
 import ir.moke.coinex.model.enums.MarketType;
 import ir.moke.coinex.model.enums.OrderSide;
 import ir.moke.coinex.model.enums.OrderType;
-import ir.moke.coinex.model.request.CancelOrder;
-import ir.moke.coinex.model.request.ClosePosition;
+import ir.moke.coinex.model.request.*;
 import ir.moke.coinex.model.request.Order;
-import ir.moke.coinex.model.request.PositionLeverage;
 import ir.moke.coinex.model.response.*;
 import ir.moke.coinex.resource.Asset;
 import ir.moke.coinex.resource.Perpetual;
@@ -181,6 +179,11 @@ public class PerpetualTest {
         System.out.println("Position : " + JsonUtils.toJson(positionResponse.data()));
         Assertions.assertNotNull(positionResponse);
         Assertions.assertEquals(0, positionResponse.code());
+
+        Response<PositionResponse> adjustResponse = perpetual.adjustPositionMargin(new PositionMargin(SYMBOL, MarketType.FUTURES, minAmount));
+        System.out.println("Adjust position : " + JsonUtils.toJson(positionResponse.data()));
+        Assertions.assertNotNull(adjustResponse);
+        Assertions.assertEquals(0, adjustResponse.code());
 
         // Try to close position
         Response<OrderResponse> closePositionOrder = perpetual.closePosition(new ClosePosition(SYMBOL, MarketType.FUTURES));
