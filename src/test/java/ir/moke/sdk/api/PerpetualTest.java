@@ -6,8 +6,8 @@ import ir.moke.coinex.model.enums.MarginMode;
 import ir.moke.coinex.model.enums.MarketType;
 import ir.moke.coinex.model.enums.OrderSide;
 import ir.moke.coinex.model.enums.OrderType;
-import ir.moke.coinex.model.request.*;
 import ir.moke.coinex.model.request.Order;
+import ir.moke.coinex.model.request.*;
 import ir.moke.coinex.model.response.*;
 import ir.moke.coinex.resource.Asset;
 import ir.moke.coinex.resource.Perpetual;
@@ -180,6 +180,7 @@ public class PerpetualTest {
         Assertions.assertNotNull(positionResponse);
         Assertions.assertEquals(0, positionResponse.code());
 
+        // Adjust position
         Response<PositionResponse> adjustResponse = perpetual.adjustPositionMargin(new PositionMargin(SYMBOL, MarketType.FUTURES, minAmount));
         System.out.println("Adjust position : " + JsonUtils.toJson(positionResponse.data()));
         Assertions.assertNotNull(adjustResponse);
