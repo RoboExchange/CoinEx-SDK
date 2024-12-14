@@ -205,4 +205,31 @@ public class PerpetualTest {
         Response<List<PositionResponse>> response = perpetual.finishedPosition(SYMBOL, MarketType.FUTURES, null, null, 0, 1);
         Assertions.assertEquals(response.code(), 0);
     }
+
+    @Test
+    @org.junit.jupiter.api.Order(10)
+    public void listPositions() {
+        // First check current open positions
+        Response<List<PositionResponse>> positionResponse = perpetual.pendingPosition("DOGEUSDT", MarketType.FUTURES, null, null);
+        Assertions.assertEquals(positionResponse.code(), 0);
+        System.out.printf("Current open positions: %s%n", positionResponse.data().size());
+        if (!positionResponse.data().isEmpty()) {
+            for (PositionResponse pr : positionResponse.data()) {
+                System.out.println(JsonUtils.toJson(pr));
+            }
+        }
+    }
+
+    @Test
+    @org.junit.jupiter.api.Order(11)
+    public void adjustPosition() {
+        // First check current open positions
+        Response<PositionResponse> response = perpetual.adjustPositionMargin(new PositionMargin("DOGEUSDT", MarketType.FUTURES, "30"));
+        Assertions.assertNotNull(response);
+        System.out.println(response.message());
+        System.out.println(response.code());
+        Assertions.assertEquals(response.code(), 0);
+
+        System.out.println(JsonUtils.toJson(response.data()));
+    }
 }
