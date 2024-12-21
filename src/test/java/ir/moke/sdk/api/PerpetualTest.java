@@ -210,7 +210,7 @@ public class PerpetualTest {
     @org.junit.jupiter.api.Order(10)
     public void listPositions() {
         // First check current open positions
-        Response<List<PositionResponse>> positionResponse = perpetual.pendingPosition("DOGEUSDT", MarketType.FUTURES, null, null);
+        Response<List<PositionResponse>> positionResponse = perpetual.pendingPosition(null, MarketType.FUTURES, null, null);
         Assertions.assertEquals(positionResponse.code(), 0);
         System.out.printf("Current open positions: %s%n", positionResponse.data().size());
         if (!positionResponse.data().isEmpty()) {
@@ -231,5 +231,25 @@ public class PerpetualTest {
         Assertions.assertEquals(response.code(), 0);
 
         System.out.println(JsonUtils.toJson(response.data()));
+    }
+
+    @Test
+    @org.junit.jupiter.api.Order(12)
+    public void checkAsset() {
+        Response<List<FutureBalanceResponse>> afterBalanceResponse = asset.futuresBalance();
+        Assertions.assertEquals(0, afterBalanceResponse.code());
+        System.out.println(JsonUtils.toJson(afterBalanceResponse.data()));
+    }
+
+    @Test
+    @org.junit.jupiter.api.Order(13)
+    public void listPositionHistory() {
+        // First check current open positions
+        Response<List<PositionResponse>> positionResponse = perpetual.finishedPosition(null, MarketType.FUTURES, null, null, 1, 250);
+        Assertions.assertEquals(positionResponse.code(), 0);
+        System.out.printf("Current open positions: %s%n", positionResponse.data().size());
+        if (!positionResponse.data().isEmpty()) {
+            System.out.println(JsonUtils.toJson(positionResponse.data()));
+        }
     }
 }
