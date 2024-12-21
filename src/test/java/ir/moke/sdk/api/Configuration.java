@@ -11,8 +11,11 @@ public class Configuration {
         try (InputStream is = PerpetualTest.class.getClassLoader().getResourceAsStream("test.properties")) {
             Properties properties = new Properties();
             properties.load(is);
-            ACCESS_ID = properties.getProperty("ACCESS_ID");
-            SECRET_KEY = properties.getProperty("SECRET_KEY");
+            ACCESS_ID = properties.getProperty("TRADER_ACCESS_ID");
+            SECRET_KEY = properties.getProperty("TRADER_SECRET_KEY");
+
+            System.out.println(ACCESS_ID);
+            System.out.println(SECRET_KEY);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

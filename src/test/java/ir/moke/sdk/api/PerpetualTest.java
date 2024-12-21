@@ -14,6 +14,8 @@ import ir.moke.coinex.resource.Perpetual;
 import ir.moke.kafir.utils.JsonUtils;
 import org.junit.jupiter.api.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -243,13 +245,18 @@ public class PerpetualTest {
 
     @Test
     @org.junit.jupiter.api.Order(13)
-    public void listPositionHistory() {
+    public void listPositionHistory() throws IOException {
         // First check current open positions
         Response<List<PositionResponse>> positionResponse = perpetual.finishedPosition(null, MarketType.FUTURES, null, null, 1, 250);
         Assertions.assertEquals(positionResponse.code(), 0);
         System.out.printf("Current open positions: %s%n", positionResponse.data().size());
         if (!positionResponse.data().isEmpty()) {
-            System.out.println(JsonUtils.toJson(positionResponse.data()));
+            String json = JsonUtils.toJson(positionResponse.data());
+            FileWriter writer = new FileWriter("/tmp/output.json");
+            writer.write(json);
+            writer.flush();
+            writer.close();
+            System.out.println(json);
         }
     }
 }
