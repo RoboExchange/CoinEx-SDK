@@ -247,7 +247,7 @@ public class PerpetualTest {
     @org.junit.jupiter.api.Order(13)
     public void listPositionHistory() throws IOException {
         // First check current open positions
-        Response<List<PositionResponse>> positionResponse = perpetual.finishedPosition(null, MarketType.FUTURES, null, null, 1, 250);
+        Response<List<PositionResponse>> positionResponse = perpetual.finishedPosition("MOCAUSDT", MarketType.FUTURES, null, null, 1, 250);
         Assertions.assertEquals(positionResponse.code(), 0);
         System.out.printf("Current open positions: %s%n", positionResponse.data().size());
         if (!positionResponse.data().isEmpty()) {

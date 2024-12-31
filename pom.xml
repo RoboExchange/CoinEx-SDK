@@ -4,7 +4,7 @@
     <groupId>ir.moke</groupId>
     <artifactId>coinex4j</artifactId>
     <packaging>jar</packaging>
-    <version>0.2</version>
+    <version>0.2.1</version>
     <name>coinex4j</name>
     <url>https://github.com/mah454/kafir</url>
     <description>Communicate With Coinex API</description>

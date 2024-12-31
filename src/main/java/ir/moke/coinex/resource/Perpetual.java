@@ -106,8 +106,8 @@ public interface Perpetual {
     @GET("/futures/finished-position")
     Response<List<PositionResponse>> finishedPosition(@QueryParameter("market") String market,
                                                       @QueryParameter("market_type") MarketType marketType,
-                                                      @QueryParameter("start_time") Integer startTime, // timestamp
-                                                      @QueryParameter("end_time") Integer endTime, // timestamp
+                                                      @QueryParameter("start_time") Long startTime, // timestamp
+                                                      @QueryParameter("end_time") Long endTime, // timestamp
                                                       @QueryParameter("page") Integer page,
                                                       @QueryParameter("limit") Integer limit);
 }
